@@ -1,11 +1,11 @@
-name: CRA Default Build Branches
+name: Next.js Build Branches
 
 on:
     workflow_call:
 
 jobs:
-    build:
-        name: CRA install and build branch
+    build-branches:
+        name: Next.js Install and Build Branches
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
