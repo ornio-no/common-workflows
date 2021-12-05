@@ -1,0 +1,23 @@
+name: K8S Manager
+
+on:
+    workflow_dispatch:
+        inputs:
+            env:
+                description: "Environment (dev | prod)"
+                required: true
+                default: "dev"
+            action:
+                description: "Action (apply | delete)"
+                required: true
+                default: "apply"
+
+jobs:
+    k8s_manage:
+        uses: ornio-no/gh-actions/.github/workflows/k8-manage.yml@main
+        with:
+            env: ${{ inputs.env }}
+            action: ${{ inputs.action }}
+        secrets:
+            k8s_token: ${{ secrets.DO_TOKEN_DEV }}
+            k8s_cluster_id: ${{ secrets.DO_CLUSTER_ID_DEV }}
