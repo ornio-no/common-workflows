@@ -7,6 +7,14 @@ on:
                 description: "Image name"
                 required: true
                 type: string
+            k8s_token:
+                description: "K8S (Digital Ocean) Token"
+                required: true
+                type: string
+            k8s_cluster_id:
+                description: "K8S (Digital Ocean) Cluster ID"
+                required: true
+                type: string
 
 env:
     NAMESPACE: ornio-prod
@@ -14,8 +22,8 @@ env:
     DEPLOYMENT_NAME: ${{ inputs.image_name }}
     TAG_NAME: registry.digitalocean.com/uwork-k8s/$IMAGE_NAME
     TAG_NAME_WITH_COMMIT: registry.digitalocean.com/uwork-k8s/$IMAGE_NAME:$GITHUB_SHA
-    DO_TOKEN: ${{ secrets.DO_TOKEN_PROD }}
-    DO_CLUSTER_ID: ${{ secrets.DO_CLUSTER_ID_PROD }}
+    DO_TOKEN: ${{ inputs.k8s_token }}
+    DO_CLUSTER_ID: ${{ inputs.k8s_cluster_id }}
 
 jobs:
     build-and-deploy-prod:
