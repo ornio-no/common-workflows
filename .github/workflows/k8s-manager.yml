@@ -13,12 +13,20 @@ on:
                 required: true
                 type: string
                 default: "apply"
+            k8s_token:
+                description: "K8S (Digital Ocean) Token"
+                required: true
+                type: string
+            k8s_cluster_id:
+                description: "K8S (Digital Ocean) Cluster ID"
+                required: true
+                type: string
 
 env:
     NAMESPACE: ornio-${{ inputs.env }}
     DEPLOY_PATH: .k8s/${{ inputs.env }}/
-    DO_TOKEN: ${{ secrets.DO_TOKEN_DEV }}
-    DO_CLUSTER_ID: ${{ secrets.DO_CLUSTER_ID_DEV }}
+    DO_TOKEN: ${{ inputs.k8s_token }}
+    DO_CLUSTER_ID: ${{ inputs.k8s_cluster_id }}
 
 jobs:
     k8s_manage:
