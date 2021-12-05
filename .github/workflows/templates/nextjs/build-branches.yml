@@ -1,0 +1,11 @@
+name: Build branches
+
+on:
+    push:
+        branches-ignore:
+            - main
+    workflow_dispatch:
+
+jobs:
+    build-branches:
+        uses: ornio-no/gh-actions/.github/workflows/nextjs-build-branches.yml@main
