@@ -9,7 +9,7 @@ on:
 
 jobs:
     build-and-deploy-prod:
-        uses: ornio-no/gh-actions/.github/workflows/nextjs-build-and-deploy-prod.yml@main
+        uses: ornio-no/common-workflows/.github/workflows/nextjs-build-and-deploy-prod.yml@main
         with:
             image_name: <<IMAGE_NAME>>
         secrets:

@@ -8,4 +8,4 @@ on:
 
 jobs:
     build-branches:
-        uses: ornio-no/gh-actions/.github/workflows/nextjs-build-branches.yml@main
+        uses: ornio-no/common-workflows/.github/workflows/nextjs-build-branches.yml@main
