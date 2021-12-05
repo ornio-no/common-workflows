@@ -14,7 +14,7 @@ on:
 
 jobs:
     k8s_manage:
-        uses: ornio-no/gh-actions/.github/workflows/k8-manage.yml@main
+        uses: ornio-no/common-workflows/.github/workflows/k8-manage.yml@main
         with:
             env: ${{ inputs.env }}
             action: ${{ inputs.action }}
