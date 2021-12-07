@@ -8,7 +8,7 @@ on:
         type: string
 
 jobs:
-  build-app:
+  build-and-deploy:
     name: Hasura Install and Apply Migrations and Metadata
     runs-on: ubuntu-latest
     steps:
