@@ -1,0 +1,14 @@
+name: Build and Deploy Production
+
+on:
+  schedule:
+    # Set desired time of deploy (UTC)
+    # Minute Hour DayOfMonth Month DayOfWeek
+    - cron: "0 11 * * 2"
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy-dev:
+    uses: ornio-no/common-workflows/.github/workflows/hasura-deploy.yml@main
+    with:
+      environment: prod
