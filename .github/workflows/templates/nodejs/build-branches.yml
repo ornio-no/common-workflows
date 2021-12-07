@@ -1,0 +1,11 @@
+name: Buld branches
+
+on:
+  push:
+    branches-ignore:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-branches:
+    - uses: ornio-no/common-workflows/.github/workflows/nodejs-build-branches.yml@main
