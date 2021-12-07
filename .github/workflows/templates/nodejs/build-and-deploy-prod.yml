@@ -1,0 +1,17 @@
+name: Build and Deploy Production
+
+on:
+  schedule:
+    # Set desired time of deploy (UTC)
+    # Minute Hour DayOfMonth Month DayOfWeek
+    - cron: "0 11 * * 2"
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy-prod:
+    uses: ornio-no/common-workflows/.github/workflows/nodejs-build-and-deploy-prod.yml@main
+    with:
+      image_name: <<IMAGE_NAME>>
+    secrets:
+      k8s_token: ${{ secrets.DO_TOKEN_PROD }}
+      k8s_cluster_id: ${{ secrets.DO_CLUSTER_ID_PROD }}
