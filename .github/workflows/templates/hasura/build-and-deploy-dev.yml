@@ -8,6 +8,6 @@ on:
 
 jobs:
   build-and-deploy-dev:
-    uses: ornio-no/common-workflows/.github/workflows/hasura-deploy.yml@main
+    uses: ornio-no/common-workflows/.github/workflows/hasura-build-and-deploy.yml@main
     with:
       env: dev
