@@ -8,4 +8,4 @@ on:
 
 jobs:
   build-branches:
-    uses: ornio-no/common-workflows/.github/workflows/nodejs-build-branches.yml@main
+    uses: ornio-no/common-workflows/.github/workflows/cra-build-branches.yml@main
