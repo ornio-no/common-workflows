@@ -10,4 +10,4 @@ jobs:
   build-branches:
     uses: ornio-no/common-workflows/.github/workflows/cra-build-branches.yml@main
     with:
-      - node-version: <<NODE VERSION>>
+      node-version: <<NODE VERSION>>
