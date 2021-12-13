@@ -10,6 +10,7 @@ jobs:
   build-and-deploy-dev:
     uses: ornio-no/common-workflows/.github/workflows/cra-build-and-deploy-dev.yml@main
     with:
+      node-version: <<NODE_VERSION>>
       image_name: <<IMAGE_NAME>>
     secrets:
       k8s_token: ${{ secrets.DO_TOKEN_DEV }}

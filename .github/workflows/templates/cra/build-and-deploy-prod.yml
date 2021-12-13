@@ -11,6 +11,7 @@ jobs:
   build-and-deploy-prod:
     uses: ornio-no/common-workflows/.github/workflows/cra-build-and-deploy-prod.yml@main
     with:
+      node-version: <<NODE_VERSION>>
       image_name: <<IMAGE_NAME>>
     secrets:
       k8s_token: ${{ secrets.DO_TOKEN_PROD }}
