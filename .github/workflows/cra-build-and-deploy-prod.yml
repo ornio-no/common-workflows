@@ -3,6 +3,11 @@ name: CRA Build and Deploy Production
 on:
   workflow_call:
     inputs:
+      node-version:
+        default: "lts/*"
+        description: "Node Version"
+        required: false
+        type: string
       image_name:
         description: "Image name"
         required: true
@@ -32,8 +37,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
-          node-version: "lts/*"
-      - name: "Build the app"
+          node-version: ${{inputs.node-version}}
       - run: |
           cp .env.prod .env
           npm install
