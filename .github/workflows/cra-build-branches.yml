@@ -4,6 +4,7 @@ on:
   workflow_call:
     inputs:
       node-version:
+        default: "lts/*"
         description: "Node Version"
         required: false
         type: string
@@ -27,7 +28,7 @@ jobs:
             ${{ runner.os }}-
       - uses: actions/setup-node@v2
         with:
-          node-version: ${{ inputs.node-version && inputs.node-version || 'lts/*' }}
+          node-version: ${{inputs.node-version}}
       - name: Install dependencies
         run: npm install
       - name: Run build
