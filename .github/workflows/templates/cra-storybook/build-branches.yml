@@ -1,0 +1,13 @@
+name: Build branches
+
+on:
+  push:
+    branches-ignore:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-branches:
+    uses: ornio-no/common-workflows/.github/workflows/cra-storybook-build-branches.yml@main
+    with:
+      node-version: <<NODE VERSION>>

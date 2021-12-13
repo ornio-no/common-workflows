@@ -1,0 +1,17 @@
+name: Build and Deploy Development
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy-dev:
+    uses: ornio-no/common-workflows/.github/workflows/cra-storybook-build-and-deploy-dev.yml@main
+    with:
+      node-version: <<NODE_VERSION>>
+      image_name: <<IMAGE_NAME>>
+    secrets:
+      k8s_token: ${{ secrets.DO_TOKEN_DEV }}
+      k8s_cluster_id: ${{ secrets.DO_CLUSTER_ID_DEV }}
