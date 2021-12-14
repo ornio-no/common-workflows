@@ -52,7 +52,7 @@ jobs:
   build-and-deploy-dev:
     name: Build and deploy Docker image
     runs-on: ubuntu-latest
-    needs: build_app
+    needs: build-app
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v2
