@@ -30,7 +30,7 @@ env:
   DO_CLUSTER_ID: ${{ secrets.k8s_cluster_id }}
 
 jobs:
-  build_app:
+  build-app:
     name: Build the app
     runs-on: ubuntu-latest
     steps:

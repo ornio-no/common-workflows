@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-deploy-dev:
+  build-and-deploy-prod:
     uses: ornio-no/common-workflows/.github/workflows/hasura-build-and-deploy.yml@main
     with:
       env: prod
