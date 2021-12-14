@@ -28,18 +28,18 @@ env:
     DO_CLUSTER_ID: ${{ secrets.k8s_cluster_id }}
 
 jobs:
-    k8s_manage:
+    k8s-manage:
         name: K8S Manage
         if: ${{ (inputs.env == 'dev' || inputs.env == 'prod') && (inputs.action == 'apply' || inputs.action == 'delete')}}
         runs-on: ubuntu-latest
         steps:
-            -   name: Checkout the code
-                uses: actions/checkout@v2
-            -   name: Install doctl
-                uses: digitalocean/action-doctl@v2
-                with:
-                    token: ${{ env.DO_TOKEN }}
-            -   name: Execute action towards K8S
-                run: |
-                    doctl kubernetes cluster kubeconfig save --expiry-seconds 600 ${{ env.DO_CLUSTER_ID }}
-                    kubectl ${{ inputs.action }} -f ${{ env.DEPLOY_PATH }} --insecure-skip-tls-verify --namespace=${{ env.NAMESPACE }}
+            - name: Checkout the code
+              uses: actions/checkout@v2
+            - name: Install doctl
+              uses: digitalocean/action-doctl@v2
+              with:
+                  token: ${{ env.DO_TOKEN }}
+            - name: Execute action towards K8S
+              run: |
+                  doctl kubernetes cluster kubeconfig save --expiry-seconds 600 ${{ env.DO_CLUSTER_ID }}
+                  kubectl ${{ inputs.action }} -f ${{ env.DEPLOY_PATH }} --insecure-skip-tls-verify --namespace=${{ env.NAMESPACE }}
