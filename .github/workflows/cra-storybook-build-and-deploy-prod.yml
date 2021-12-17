@@ -21,7 +21,7 @@ on:
         required: true
 
 env:
-  NAMESPACE: ornio-dev
+  NAMESPACE: ornio-prod
   IMAGE_NAME: ${{ inputs.image_name }}
   DEPLOYMENT_NAME: ${{ inputs.image_name }}
   TAG_NAME: registry.digitalocean.com/uwork-k8s/$IMAGE_NAME
