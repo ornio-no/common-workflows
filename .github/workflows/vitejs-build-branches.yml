@@ -1,0 +1,40 @@
+name: Vite.js Build Branches
+
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        description: "Node Version"
+        required: false
+        type: string
+
+jobs:
+  build-branches:
+    name: Vite.js Install and Build Branches
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{inputs.node-version}}
+      - name: Install dependencies
+        run: npm install
+      - name: Copy environment
+        run: cp .env.dev .env
+      - name: Run build
+        run: npm run build
+      - name: Run lints
+        run: npm run lint --if-present
+      - name: Run tests
+        run: npm run test --if-present
