@@ -13,11 +13,11 @@ on:
                 default: "apply"
 
 jobs:
-    k8s-manage:
-        uses: ornio-no/common-workflows/.github/workflows/k8s-manage.yml@main
+    k8s-manager:
+        uses: ornio-no/common-workflows/.github/workflows/k8s-manager.yml@main
         with:
-            env: ${{ inputs.env }}
-            action: ${{ inputs.action }}
+            env: ${{ github.event.inputs.env }}
+            action: ${{ github.event.inputs.action }}
         secrets:
             k8s_token: ${{ secrets.DO_TOKEN_DEV }}
             k8s_cluster_id: ${{ secrets.DO_CLUSTER_ID_DEV }}
