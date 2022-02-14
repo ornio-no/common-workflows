@@ -8,7 +8,7 @@ on:
         required: false
         type: string
     secrets:
-      github_token:
+      gh_token:
         description: "Github Token"
         required: true
       pat_pkg:
@@ -16,8 +16,8 @@ on:
         required: true
 
 env:
+    GH_TOKEN: ${{ secrets.gh_token }}
     PAT_PKG: ${{ secrets.pat_pkg }}
-    GITHUB_TOKEN: ${{ secrets.github_token }}
 
 jobs:
   build-branches:
@@ -42,7 +42,7 @@ jobs:
       - name: Install dependencies
         run: npm install
         env:
-          GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ env.GH_TOKEN }}
           NODE_AUTH_TOKEN: ${{ env.PAT_PKG }}
       - name: Copy environment
         run: cp .env.dev .env
