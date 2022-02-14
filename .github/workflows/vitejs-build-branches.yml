@@ -39,6 +39,8 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: ${{inputs.node-version}}
+          registry-url: https://npm.pkg.github.com/
+          scope: '@ornio-no'
       - name: Install dependencies
         run: npm install
         env:
