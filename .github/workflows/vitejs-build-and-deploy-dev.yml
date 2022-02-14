@@ -47,7 +47,7 @@ jobs:
         with:
           node-version: ${{inputs.node-version}}
           registry-url: https://npm.pkg.github.com/
-          scope: '@ornio'
+          scope: '@ornio-no'
       - run: |
           cp .env.dev .env
           npm install
