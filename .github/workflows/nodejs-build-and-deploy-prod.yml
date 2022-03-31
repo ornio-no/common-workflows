@@ -7,7 +7,8 @@ on:
         description: "Image name"
         required: true
         type: string
-      run_jobs: "Run jobs"
+      run_jobs:
+        description: "Run jobs"
         required: false
         default: false
         type: boolean
