@@ -57,5 +57,5 @@ jobs:
       - name: Run jobs
         if: ${{ env.RUN_JOBS }}
         run: |
-          kubectl --insecure-skip-tls-verify delete -f .k8s/${{ env.NAMESPACE_ENV }}/jobs
+          kubectl --insecure-skip-tls-verify --ignore-not-found=true delete -f .k8s/${{ env.NAMESPACE_ENV }}/jobs
           kubectl --insecure-skip-tls-verify apply -f .k8s/${{ env.NAMESPACE_ENV }}/jobs
