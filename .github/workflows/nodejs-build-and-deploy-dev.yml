@@ -7,6 +7,10 @@ on:
         description: "Image name"
         required: true
         type: string
+      run_migrations: "Run migrations"
+        required: false
+        default: false
+        type: boolean
     secrets:
       k8s_token:
         description: "K8S (Digital Ocean) Token"
@@ -16,6 +20,7 @@ on:
         required: true
 
 env:
+  NAMESPACE_ENV: dev
   NAMESPACE: ornio-dev
   IMAGE_NAME: ${{ inputs.image_name }}
   DEPLOYMENT_NAME: ${{ inputs.image_name }}
@@ -23,6 +28,7 @@ env:
   TAG_NAME_WITH_COMMIT: registry.digitalocean.com/uwork-k8s/$IMAGE_NAME:$GITHUB_SHA
   DO_TOKEN: ${{ secrets.k8s_token }}
   DO_CLUSTER_ID: ${{ secrets.k8s_cluster_id }}
+  RUN_MIGRATIONS: ${{ inputs.run_migrations }}
 
 jobs:
   build-and-deploy-dev:
@@ -47,3 +53,6 @@ jobs:
         run: |
           doctl kubernetes cluster kubeconfig save --expiry-seconds 600 ${{ env.DO_CLUSTER_ID }}
           kubectl --insecure-skip-tls-verify --namespace=${{ env.NAMESPACE }} set image deployment/${{ env.DEPLOYMENT_NAME }} ${{ env.DEPLOYMENT_NAME }}=${{ env.TAG_NAME_WITH_COMMIT }}
+      - name: Run migration
+        if: ${{ env.RUN_MIGRATIONS }}
+        run: kubectl --insecure-skip-tls-verify apply -f ./k8s/${{ env.NAMESPACE_ENV }}/job.yaml
