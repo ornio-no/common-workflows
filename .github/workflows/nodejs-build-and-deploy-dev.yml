@@ -55,7 +55,7 @@ jobs:
           doctl kubernetes cluster kubeconfig save --expiry-seconds 600 ${{ env.DO_CLUSTER_ID }}
           kubectl --insecure-skip-tls-verify --namespace=${{ env.NAMESPACE }} set image deployment/${{ env.DEPLOYMENT_NAME }} ${{ env.DEPLOYMENT_NAME }}=${{ env.TAG_NAME_WITH_COMMIT }}
       - name: Run jobs
-        if: ${{ env.RUN_JOBS }}
+        if: ${{ env.RUN_JOBS == true }}
         run: |
           kubectl --insecure-skip-tls-verify --ignore-not-found=true delete -f .k8s/${{ env.NAMESPACE_ENV }}/jobs
           kubectl --insecure-skip-tls-verify apply -f .k8s/${{ env.NAMESPACE_ENV }}/jobs
