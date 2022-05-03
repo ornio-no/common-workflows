@@ -12,6 +12,10 @@ on:
         description: "Image name"
         required: true
         type: string
+      pre_build:
+        description: "Run Pre Build"
+        required: false
+        type: string
     secrets:
       k8s_token:
         description: "K8S (Digital Ocean) Token"
@@ -41,7 +45,7 @@ jobs:
       - run: |
           cp .env.prod .env
           npm install
-          npm run build
+          ${{inputs.pre_build}} npm run build
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
