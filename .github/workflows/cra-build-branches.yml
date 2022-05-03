@@ -7,10 +7,10 @@ on:
         description: "Node Version"
         required: false
         type: string
-    pre_build:
-      description: "Run Pre Build"
-      required: false
-      type: string
+      pre_build:
+        description: "Run Pre Build"
+        required: false
+        type: string
 
 jobs:
   build-branches:
