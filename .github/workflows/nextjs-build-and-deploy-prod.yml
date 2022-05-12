@@ -7,6 +7,11 @@ on:
                 description: "Image name"
                 required: true
                 type: string
+            registry_url:
+                description: "Docker Registry URL"
+                required: false
+                type: string
+                default: "registry.digitalocean.com/ornio-k8s-registry"
         secrets:
             k8s_token:
                 description: "K8S (Digital Ocean) Token"
@@ -19,8 +24,9 @@ env:
     NAMESPACE: ornio-prod
     IMAGE_NAME: ${{ inputs.image_name }}
     DEPLOYMENT_NAME: ${{ inputs.image_name }}
-    TAG_NAME: registry.digitalocean.com/ornio-k8s-registry/$IMAGE_NAME
-    TAG_NAME_WITH_COMMIT: registry.digitalocean.com/ornio-k8s-registry/$IMAGE_NAME:$GITHUB_SHA
+    REGISTRY_URL: ${{ inputs.registry_url }}
+    TAG_NAME: $REGISTRY_URL/$IMAGE_NAME
+    TAG_NAME_WITH_COMMIT: $REGISTRY_URL/$IMAGE_NAME:$GITHUB_SHA
     DO_TOKEN: ${{ secrets.k8s_token }}
     DO_CLUSTER_ID: ${{ secrets.k8s_cluster_id }}
 
