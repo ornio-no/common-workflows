@@ -13,9 +13,9 @@ on:
         required: true
         type: string
       pre_build:
-          description: "Run Pre Build"
-          required: false
-          type: string
+        description: "Run Pre Build"
+        required: false
+        type: string
     secrets:
       k8s_token:
         description: "K8S (Digital Ocean) Token"
