@@ -52,6 +52,8 @@ jobs:
           node-version: ${{inputs.node-version}}
           registry-url: https://npm.pkg.github.com/
           scope: '@ornio-no'
+      - name: Configure git for private modules
+        run: git config --global url."https://oxodesign:${{ env.PAT_PKG }}@github.com/".insteadOf "ssh://git@github.com/"
       - run: |
           cp .env.dev .env
           npm install
