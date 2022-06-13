@@ -106,8 +106,6 @@ jobs:
           node-version: ${{inputs.node-version}}
           registry-url: https://npm.pkg.github.com/
           scope: "@ornio-no"
-      - name: Authenticate with GitHub package registry
-        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}" > ~/.npmrc
       - name: Create Release
         env:
           GITHUB_TOKEN: ${{ env.GH_TOKEN }}
