@@ -16,6 +16,10 @@ on:
         description: "Run Pre Build"
         required: false
         type: string
+      release:
+        description: "Include project release"
+        required: false
+        type: boolean
     secrets:
       k8s_token:
         description: "K8S (Digital Ocean) Token"
@@ -53,7 +57,7 @@ jobs:
         with:
           node-version: ${{inputs.node-version}}
           registry-url: https://npm.pkg.github.com/
-          scope: '@ornio-no'
+          scope: "@ornio-no"
       - name: Configure git for private modules
         run: git config --global url."https://oxodesign:${{ env.PAT_PKG }}@github.com/".insteadOf "ssh://git@github.com/"
       - run: |
@@ -95,3 +99,28 @@ jobs:
         run: |
           doctl kubernetes cluster kubeconfig save --expiry-seconds 600 ${{ env.DO_CLUSTER_ID }}
           kubectl --insecure-skip-tls-verify --namespace=${{ env.NAMESPACE }} set image deployment/${{ env.DEPLOYMENT_NAME }} ${{ env.DEPLOYMENT_NAME }}=${{ env.TAG_NAME_WITH_COMMIT }}
+  release:
+    name: Create a release of the app
+    runs-on: ubuntu-latest
+    if: "inputs.release && (!contains(github.event.head_commit.message, 'ci skip') && !contains(github.event.head_commit.message, 'skip ci')) && github.ref == 'refs/heads/main'"
+    needs: build-and-deploy-prod
+    steps:
+      - uses: actions/checkout@v2
+      - name: Prepare repository
+        run: git fetch --unshallow --tags
+      - name: Use Node.js@v2
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{inputs.node-version}}
+          registry-url: https://npm.pkg.github.com/
+          scope: "@ornio-no"
+      - name: Create Release
+        env:
+          GITHUB_TOKEN: ${{ env.GH_TOKEN }}
+          NPM_TOKEN: ${{ env.GH_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ env.GH_TOKEN }}
+        run: |
+          cp .env.prod .env
+          npm ci
+          npm run build
+          npm run release
