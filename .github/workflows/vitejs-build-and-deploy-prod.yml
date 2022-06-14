@@ -49,9 +49,9 @@ jobs:
     name: Build the app
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
-          token: ${{ secrets.PAT_ADMIN }}
+          token: ${{ env.PAT_PKG }}
       - run: git fetch --unshallow --tags
       - uses: actions/setup-node@v2
         with:
