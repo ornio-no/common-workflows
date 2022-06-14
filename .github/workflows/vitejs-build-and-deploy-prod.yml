@@ -63,9 +63,9 @@ jobs:
       - name: Create release
         if: "inputs.release && (!contains(github.event.head_commit.message, 'ci skip') && !contains(github.event.head_commit.message, 'skip ci')) && github.ref == 'refs/heads/main'"
         env:
-          GITHUB_TOKEN: ${{ env.GH_TOKEN }}
-          NPM_TOKEN: ${{ env.GH_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ env.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ env.PAT_PKG }}
+          NPM_TOKEN: ${{ env.PAT_PKG }}
+          NODE_AUTH_TOKEN: ${{ env.PAT_PKG }}
         run: npm run release
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
