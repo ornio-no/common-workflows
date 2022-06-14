@@ -51,6 +51,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          token: ${{ env.PAT_ADMIN }}
       - run: git fetch --unshallow --tags
       - uses: actions/setup-node@v2
         with:
