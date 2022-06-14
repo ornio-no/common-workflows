@@ -29,6 +29,9 @@ on:
       pat_pkg:
         description: "Personal Access Token for Packages"
         required: true
+      pat_admin:
+        description: "Personal Access Token with Admin permission"
+        required: false
 
 env:
   NAMESPACE: ornio-prod
@@ -40,6 +43,7 @@ env:
   DO_CLUSTER_ID: ${{ secrets.k8s_cluster_id }}
   GH_TOKEN: ${{ secrets.gh_token }}
   PAT_PKG: ${{ secrets.pat_pkg }}
+  PAT_ADMIN: ${{ secrets.pat_admin }}
 
 jobs:
   build-app:
@@ -63,9 +67,9 @@ jobs:
       - name: Create release
         if: "inputs.release && (!contains(github.event.head_commit.message, 'ci skip') && !contains(github.event.head_commit.message, 'skip ci')) && github.ref == 'refs/heads/main'"
         env:
-          GITHUB_TOKEN: ${{ env.PAT_PKG }}
-          NPM_TOKEN: ${{ env.PAT_PKG }}
-          NODE_AUTH_TOKEN: ${{ env.PAT_PKG }}
+          GITHUB_TOKEN: ${{ env.PAT_ADMIN }}
+          NPM_TOKEN: ${{ env.PAT_ADMIN }}
+          NODE_AUTH_TOKEN: ${{ env.PAT_ADMIN }}
         run: npm run release
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
