@@ -113,6 +113,6 @@ jobs:
           NODE_AUTH_TOKEN: ${{ env.GH_TOKEN }}
         run: |
           cp .env.prod .env
-          npm install
+          npm ci
           npm run build
           npm run release
