@@ -51,10 +51,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          token: ${{ env.PAT_PKG }}
-          persist-credentials: false
-      - run: git fetch --unshallow --tags
       - uses: actions/setup-node@v2
         with:
           node-version: ${{inputs.node-version}}
