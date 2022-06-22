@@ -62,7 +62,6 @@ jobs:
         run: git config --global url."https://oxodesign:${{ env.PAT_PKG }}@github.com/".insteadOf "ssh://git@github.com/"
       - run: |
           cp .env.prod .env
-          npm ci
           ${{inputs.pre_build}} npm run build
         env:
           GITHUB_TOKEN: ${{ env.GH_TOKEN }}
