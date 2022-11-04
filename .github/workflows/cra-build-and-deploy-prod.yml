@@ -58,6 +58,7 @@ jobs:
         run: git config --global url."https://oxodesign:${{ env.PAT_PKG }}@github.com/".insteadOf "ssh://git@github.com/"
       - run: |
           cp .env.prod .env
+          rm -rf node_modules/uwork-app-core
           npm install
           ${{inputs.pre_build}} npm run build
         env:
