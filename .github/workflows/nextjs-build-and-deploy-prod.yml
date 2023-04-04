@@ -32,6 +32,7 @@ on:
         required: true
 
 env:
+  NAMESPACE_ENV: prod
   NAMESPACE: ornio-prod
   IMAGE_NAME: ${{ inputs.image_name }}
   DEPLOYMENT_NAME: ${{ inputs.image_name }}
