@@ -27,6 +27,7 @@ on:
         required: true
 
 env:
+  NAMESPACE_ENV: dev
   NAMESPACE: ornio-dev
   IMAGE_NAME: ${{ inputs.image_name }}
   DEPLOYMENT_NAME: ${{ inputs.image_name }}
