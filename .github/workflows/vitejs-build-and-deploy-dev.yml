@@ -60,7 +60,7 @@ jobs:
           GITHUB_TOKEN: ${{ env.GH_TOKEN }}
           NODE_AUTH_TOKEN: ${{ env.PAT_PKG }}
       - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: artifact
           path: |
@@ -72,7 +72,7 @@ jobs:
     needs: build-app
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: artifact
       - name: Install doctl
