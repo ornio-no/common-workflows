@@ -70,7 +70,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ env.PAT_PKG }}
         run: npm run release
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: artifact
           path: |
@@ -82,7 +82,7 @@ jobs:
     needs: build-app
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: artifact
       - name: Install doctl
